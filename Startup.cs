@@ -33,6 +33,11 @@ namespace neurek
                 options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
             });
             services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy => policy.AllowAnyHeader()
+                    .AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +49,7 @@ namespace neurek
             }
 
             app.UseRouting();
+            app.UseCors();
 
             app.UseAuthorization();
 
