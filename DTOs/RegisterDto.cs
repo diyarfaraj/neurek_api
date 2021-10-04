@@ -12,6 +12,7 @@ namespace neurek.DTOs
         //[EmailAddress] should be added for production
         public string Email { get; set; }
         [Required]
+        [StringLength(8,MinimumLength =4)]
         public string Password { get; set; }
 
     }

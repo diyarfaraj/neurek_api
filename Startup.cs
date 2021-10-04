@@ -41,7 +41,7 @@ namespace neurek
                 options.AddDefaultPolicy(policy => policy.AllowAnyHeader()
                     .AllowAnyMethod().WithOrigins("https://localhost:4200"));
             });
-           
+            services.AddIdentityServices(_config);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
