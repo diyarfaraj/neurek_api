@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using neurek.Data;
 using neurek.Extensions;
 using neurek.Interfaces;
+using neurek.Middleware;
 using neurek.Services;
 using System;
 using System.Collections.Generic;
@@ -47,11 +48,7 @@ namespace neurek
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseRouting();
             app.UseCors();
             app.UseAuthentication();
