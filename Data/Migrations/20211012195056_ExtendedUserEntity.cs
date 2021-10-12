@@ -48,99 +48,67 @@ namespace neurek.Data.Migrations
                 nullable: true);
 
             migrationBuilder.CreateTable(
-                name: "Candidates",
+                name: "Photos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Url = table.Column<string>(type: "TEXT", nullable: true),
+                    IsMain = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PublicId = table.Column<string>(type: "TEXT", nullable: true),
+                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Candidates", x => x.Id);
+                    table.PrimaryKey("PK_Photos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Candidates_Users_Id",
-                        column: x => x.Id,
+                        name: "FK_Photos_Users_AppUserId",
+                        column: x => x.AppUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Company",
+                name: "PortfolioFile",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CompanyName = table.Column<string>(type: "TEXT", nullable: true)
+                    Url = table.Column<string>(type: "TEXT", nullable: true),
+                    IsCV = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PublicId = table.Column<string>(type: "TEXT", nullable: true),
+                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Company", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CandidateAbout",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    TypeOfEmployment = table.Column<string>(type: "TEXT", nullable: true),
-                    FullTimeEmployment = table.Column<bool>(type: "INTEGER", nullable: false),
-                    RemoteWork = table.Column<string>(type: "TEXT", nullable: true),
-                    AboutMe = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CandidateAbout", x => x.Id);
+                    table.PrimaryKey("PK_PortfolioFile", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CandidateAbout_Candidates_Id",
-                        column: x => x.Id,
-                        principalTable: "Candidates",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CompanyUser",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    CompanyId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CompanyUser", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CompanyUser_Company_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Company",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CompanyUser_Users_Id",
-                        column: x => x.Id,
+                        name: "FK_PortfolioFile_Users_AppUserId",
+                        column: x => x.AppUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CompanyUser_CompanyId",
-                table: "CompanyUser",
-                column: "CompanyId");
+                name: "IX_Photos_AppUserId",
+                table: "Photos",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PortfolioFile_AppUserId",
+                table: "PortfolioFile",
+                column: "AppUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CandidateAbout");
+                name: "Photos");
 
             migrationBuilder.DropTable(
-                name: "CompanyUser");
-
-            migrationBuilder.DropTable(
-                name: "Candidates");
-
-            migrationBuilder.DropTable(
-                name: "Company");
+                name: "PortfolioFile");
 
             migrationBuilder.DropColumn(
                 name: "Created",

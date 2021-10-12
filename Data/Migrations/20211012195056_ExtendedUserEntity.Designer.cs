@@ -9,7 +9,7 @@ using neurek.Data;
 namespace neurek.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211010162112_ExtendedUserEntity")]
+    [Migration("20211012195056_ExtendedUserEntity")]
     partial class ExtendedUserEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,123 +56,83 @@ namespace neurek.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("neurek.Entities.Candidate", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Candidates");
-                });
-
-            modelBuilder.Entity("neurek.Entities.CandidateAbout", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("AboutMe")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("FullTimeEmployment")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("RemoteWork")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("TypeOfEmployment")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CandidateAbout");
-                });
-
-            modelBuilder.Entity("neurek.Entities.Company", b =>
+            modelBuilder.Entity("neurek.Entities.Photo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("CompanyName")
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Company");
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("neurek.Entities.CompanyUser", b =>
+            modelBuilder.Entity("neurek.Entities.PortfolioFile", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CompanyId")
+                    b.Property<int>("AppUserId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsCV")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
+                    b.HasIndex("AppUserId");
 
-                    b.ToTable("CompanyUser");
+                    b.ToTable("PortfolioFile");
                 });
 
-            modelBuilder.Entity("neurek.Entities.Candidate", b =>
+            modelBuilder.Entity("neurek.Entities.Photo", b =>
                 {
                     b.HasOne("neurek.Entities.AppUser", "AppUser")
-                        .WithOne("Candidate")
-                        .HasForeignKey("neurek.Entities.Candidate", "Id")
+                        .WithMany("Photos")
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("neurek.Entities.CandidateAbout", b =>
+            modelBuilder.Entity("neurek.Entities.PortfolioFile", b =>
                 {
-                    b.HasOne("neurek.Entities.Candidate", "Candidate")
-                        .WithOne("CandidateAbout")
-                        .HasForeignKey("neurek.Entities.CandidateAbout", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Candidate");
-                });
-
-            modelBuilder.Entity("neurek.Entities.CompanyUser", b =>
-                {
-                    b.HasOne("neurek.Entities.Company", "Company")
-                        .WithMany("CompanyUsers")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("neurek.Entities.AppUser", "AppUser")
-                        .WithOne("CompanyUser")
-                        .HasForeignKey("neurek.Entities.CompanyUser", "Id")
+                        .WithMany("CandidateFiles")
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AppUser");
-
-                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("neurek.Entities.AppUser", b =>
                 {
-                    b.Navigation("Candidate");
+                    b.Navigation("CandidateFiles");
 
-                    b.Navigation("CompanyUser");
-                });
-
-            modelBuilder.Entity("neurek.Entities.Candidate", b =>
-                {
-                    b.Navigation("CandidateAbout");
-                });
-
-            modelBuilder.Entity("neurek.Entities.Company", b =>
-                {
-                    b.Navigation("CompanyUsers");
+                    b.Navigation("Photos");
                 });
 #pragma warning restore 612, 618
         }

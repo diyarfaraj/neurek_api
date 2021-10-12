@@ -18,8 +18,9 @@ namespace neurek.Entities
         public DateTime Created { get; set; } = DateTime.UtcNow;
         public DateTime LastActive { get; set; } = DateTime.UtcNow;
         public bool Deleted { get; set; }
-        public virtual Candidate Candidate { get; set; }
-        public virtual CompanyUser CompanyUser { get; set; }
+        public List<PortfolioFile> CandidateFiles { get; set; }
+        public List<Photo> Photos { get; set; }
+
 
         public int GetAge()
         {
