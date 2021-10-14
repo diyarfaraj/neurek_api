@@ -24,12 +24,16 @@ namespace neurek.Data
 
         public async Task<AppUser> GetUserByEmailAsync(string email)
         {
-            return await _context.Users.SingleOrDefaultAsync(x => x.Email == email);
+            return await _context.Users
+                .Include(x=>x.Photos)
+                .SingleOrDefaultAsync(x => x.Email == email);
         }
 
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users
+                .Include(x=>x.Photos)
+                .ToListAsync();
         }
 
         public async Task<bool> SaveAllAsync()
