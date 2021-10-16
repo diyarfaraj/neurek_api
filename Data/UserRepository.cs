@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
+using neurek.DTOs;
 using neurek.Entities;
 using neurek.Interfaces;
 using System;
@@ -11,10 +14,12 @@ namespace neurek.Data
     public class UserRepository : IUserRepository
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public UserRepository(DataContext context)
+        public UserRepository(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<AppUser> GetUserByIdAsync(int id)
@@ -44,6 +49,19 @@ namespace neurek.Data
         public void Update(AppUser user)
         {
             _context.Entry(user).State = EntityState.Modified;
+        }
+
+        public async Task<IEnumerable<CandidateDto>> GetCandidatesAsync()
+        {
+            return await _context.Users.ProjectTo<CandidateDto>(_mapper.ConfigurationProvider).ToListAsync();
+        }
+
+        public async Task<CandidateDto> GetCandidateAsync(string email)
+        {
+            return await _context.Users
+                .Where(x => x.Email == email)
+                .ProjectTo<CandidateDto>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
         }
     }
 }

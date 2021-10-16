@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using neurek.Data;
+using neurek.DTOs;
 using neurek.Entities;
 using neurek.Interfaces;
 using System;
@@ -16,23 +18,25 @@ namespace neurek.Controllers
     public class UsersController : BaseApiController
     {
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<CandidateDto>>> GetUsers()
         {
-            var users = await _userRepository.GetUsersAsync();
+            var users = await _userRepository.GetCandidatesAsync();
             return Ok(users);
         }
         [HttpGet("{email}")]
-        public async Task<ActionResult<AppUser>> GetUser( string email)
+        public async Task<ActionResult<CandidateDto>> GetUser( string email)
         {
-            var user = await _userRepository.GetUserByEmailAsync(email);
-            return user;
+            return await _userRepository.GetCandidateAsync(email);
+            
         }
     }
 }

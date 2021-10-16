@@ -12,6 +12,7 @@ namespace neurek.Entities
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt{ get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -20,12 +21,6 @@ namespace neurek.Entities
         public bool Deleted { get; set; }
         public List<PortfolioFile> CandidateFiles { get; set; }
         public List<Photo> Photos { get; set; }
-
-
-        public int GetAge()
-        {
-            return DateOfBirth.CalculateAge();
-        }
 
     }
 }
