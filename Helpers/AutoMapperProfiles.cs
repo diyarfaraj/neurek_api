@@ -18,6 +18,9 @@ namespace neurek.Helpers
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotoDto>();
             CreateMap<PortfolioFile, PortfolioFileDto>();
+            CreateMap<CandidateSkill, CandidateSkillDto>();
+            CreateMap<CandidateEducation, CandidateEducationDto>();
+            CreateMap<CandidateExperience, CandidateExperienceDto>();
         }
     }
 }

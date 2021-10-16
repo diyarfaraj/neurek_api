@@ -13,11 +13,16 @@ namespace neurek.DTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhotoUrl { get; set; }
-
+        public int SalaryPerMonth { get; set; }
+        public int NoticePeriod { get; set; }
         public int Age { get; set; }
         public DateTime Created { get; set; } 
         public DateTime LastActive { get; set; } 
         public bool Deleted { get; set; }
+        public List<CandidateSkillDto> Skills { get; set; }
+        public List<CandidateEducationDto> Educations { get; set; }
+        public List<CandidateExperienceDto> Experiences { get; set; }
+
         public List<PortfolioFileDto> CandidateFiles { get; set; }
         public List<PhotoDto> Photos { get; set; }
     }
