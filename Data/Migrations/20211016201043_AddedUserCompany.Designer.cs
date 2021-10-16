@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using neurek.Data;
 
 namespace neurek.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211016201043_AddedUserCompany")]
+    partial class AddedUserCompany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,9 +203,6 @@ namespace neurek.Data.Migrations
                     b.Property<int>("AppUserId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CompanyId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<bool>("IsMain")
                         .HasColumnType("INTEGER");
 
@@ -216,8 +215,6 @@ namespace neurek.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
-
-                    b.HasIndex("CompanyId");
 
                     b.ToTable("Photos");
                 });
@@ -319,10 +316,6 @@ namespace neurek.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("neurek.Entities.Company", null)
-                        .WithMany("Photos")
-                        .HasForeignKey("CompanyId");
-
                     b.Navigation("AppUser");
                 });
 
@@ -355,8 +348,6 @@ namespace neurek.Data.Migrations
             modelBuilder.Entity("neurek.Entities.Company", b =>
                 {
                     b.Navigation("Benefits");
-
-                    b.Navigation("Photos");
                 });
 #pragma warning restore 612, 618
         }

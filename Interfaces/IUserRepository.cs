@@ -16,5 +16,6 @@ namespace neurek.Interfaces
         Task<AppUser> GetUserByEmailAsync(string email);
         Task<IEnumerable<CandidateDto>> GetCandidatesAsync();
         Task<CandidateDto> GetCandidateAsync(string email);
+        Task<RecruterDto> GetRecruterAsync(string email);
     }
 }

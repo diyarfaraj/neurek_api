@@ -38,5 +38,11 @@ namespace neurek.Controllers
             return await _userRepository.GetCandidateAsync(email);
             
         }
+        [HttpGet("company/{email}")]
+        public async Task<ActionResult<RecruterDto>> GetRecruter(string email)
+        {
+            return await _userRepository.GetRecruterAsync(email);
+
+        }
     }
 }

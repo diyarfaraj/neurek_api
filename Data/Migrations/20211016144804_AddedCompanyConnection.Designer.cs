@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using neurek.Data;
 
 namespace neurek.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211016144804_AddedCompanyConnection")]
+    partial class AddedCompanyConnection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,9 +22,6 @@ namespace neurek.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CompanyId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Created")
@@ -53,8 +52,6 @@ namespace neurek.Data.Migrations
                         .HasColumnType("BLOB");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
 
                     b.ToTable("Users");
                 });
@@ -150,48 +147,6 @@ namespace neurek.Data.Migrations
                     b.ToTable("CandidateSkill");
                 });
 
-            modelBuilder.Entity("neurek.Entities.Company", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("YearFoundedIn")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("neurek.Entities.CompanyBenefit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.ToTable("CompanyBenefit");
-                });
-
             modelBuilder.Entity("neurek.Entities.Photo", b =>
                 {
                     b.Property<int>("Id")
@@ -199,9 +154,6 @@ namespace neurek.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("AppUserId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CompanyId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsMain")
@@ -216,8 +168,6 @@ namespace neurek.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
-
-                    b.HasIndex("CompanyId");
 
                     b.ToTable("Photos");
                 });
@@ -245,15 +195,6 @@ namespace neurek.Data.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("PortfolioFile");
-                });
-
-            modelBuilder.Entity("neurek.Entities.AppUser", b =>
-                {
-                    b.HasOne("neurek.Entities.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId");
-
-                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("neurek.Entities.CandidateEducation", b =>
@@ -300,17 +241,6 @@ namespace neurek.Data.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("neurek.Entities.CompanyBenefit", b =>
-                {
-                    b.HasOne("neurek.Entities.Company", "Company")
-                        .WithMany("Benefits")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-                });
-
             modelBuilder.Entity("neurek.Entities.Photo", b =>
                 {
                     b.HasOne("neurek.Entities.AppUser", "AppUser")
@@ -318,10 +248,6 @@ namespace neurek.Data.Migrations
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("neurek.Entities.Company", null)
-                        .WithMany("Photos")
-                        .HasForeignKey("CompanyId");
 
                     b.Navigation("AppUser");
                 });
@@ -350,13 +276,6 @@ namespace neurek.Data.Migrations
                     b.Navigation("Preferences");
 
                     b.Navigation("Skills");
-                });
-
-            modelBuilder.Entity("neurek.Entities.Company", b =>
-                {
-                    b.Navigation("Benefits");
-
-                    b.Navigation("Photos");
                 });
 #pragma warning restore 612, 618
         }

@@ -21,6 +21,11 @@ namespace neurek.Helpers
             CreateMap<CandidateSkill, CandidateSkillDto>();
             CreateMap<CandidateEducation, CandidateEducationDto>();
             CreateMap<CandidateExperience, CandidateExperienceDto>();
+            CreateMap<CandidatePreference, CandidatePreferenceDto>();
+            CreateMap<Company, CompanyDto>();
+            CreateMap<AppUser, RecruterDto>();
+            CreateMap<CompanyBenefit, CompanyBenefitDto>();
+
         }
     }
 }
