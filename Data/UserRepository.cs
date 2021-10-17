@@ -53,7 +53,9 @@ namespace neurek.Data
 
         public async Task<IEnumerable<CandidateDto>> GetCandidatesAsync()
         {
-            return await _context.Users.ProjectTo<CandidateDto>(_mapper.ConfigurationProvider).ToListAsync();
+            var candidates = await _context.Users
+                .ProjectTo<CandidateDto>(_mapper.ConfigurationProvider).ToListAsync();
+            return candidates;
         }
 
         public async Task<CandidateDto> GetCandidateAsync(string email)

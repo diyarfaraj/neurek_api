@@ -12,8 +12,8 @@ namespace neurek.DTOs
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string JobTitle { get; set; }
         public string PhotoUrl { get; set; }
-
         public int Age { get; set; }
         public DateTime Created { get; set; } 
         public DateTime LastActive { get; set; } 
@@ -22,7 +22,6 @@ namespace neurek.DTOs
         public List<CandidateEducationDto> Educations { get; set; }
         public List<CandidateExperienceDto> Experiences { get; set; }
         public List<CandidatePreferenceDto> Preferences { get; set; }
-
         public List<PortfolioFileDto> CandidateFiles { get; set; }
         public List<PhotoDto> Photos { get; set; }
     }
