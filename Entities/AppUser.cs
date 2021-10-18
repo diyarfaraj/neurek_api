@@ -14,6 +14,8 @@ namespace neurek.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string JobTitle { get; set; }
+        public string Description { get; set; }
+        public string City { get; set; }
         public DateTime DateOfBirth { get; set; }
         public DateTime Created { get; set; } = DateTime.UtcNow;
         public DateTime LastActive { get; set; } = DateTime.UtcNow;

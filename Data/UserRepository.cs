@@ -54,6 +54,10 @@ namespace neurek.Data
         public async Task<IEnumerable<CandidateDto>> GetCandidatesAsync()
         {
             var candidates = await _context.Users
+                .Include(x => x.Skills)
+                .Include(x => x.Educations)
+                .Include(x => x.Experiences)
+                .Include(x => x.Preferences)
                 .ProjectTo<CandidateDto>(_mapper.ConfigurationProvider).ToListAsync();
             return candidates;
         }
@@ -62,6 +66,10 @@ namespace neurek.Data
         {
             return await _context.Users
                 .Where(x => x.Email == email)
+                .Include(x => x.Skills)
+                .Include(x => x.Educations)
+                .Include(x => x.Experiences)
+                .Include(x => x.Preferences)
                 .ProjectTo<CandidateDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }
