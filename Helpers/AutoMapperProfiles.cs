@@ -18,13 +18,16 @@ namespace neurek.Helpers
                 //.ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotoDto>();
             CreateMap<PortfolioFile, PortfolioFileDto>();
-            CreateMap<CandidateSkill, CandidateSkillDto>();
+            CreateMap<CandidateSkill, CandidateSkillDto>()
+                .ForMember(dest => dest.DevIconName, opt => opt.MapFrom(src => src.Skills.DevIconName))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Skills.Name));
             CreateMap<CandidateEducation, CandidateEducationDto>();
             CreateMap<CandidateExperience, CandidateExperienceDto>();
             CreateMap<CandidatePreference, CandidatePreferenceDto>();
             CreateMap<Company, CompanyDto>();
             CreateMap<AppUser, RecruterDto>();
             CreateMap<CompanyBenefit, CompanyBenefitDto>();
+            CreateMap<Skills, SkillsDto>();
 
         }
     }
