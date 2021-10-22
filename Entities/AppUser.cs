@@ -23,6 +23,7 @@ namespace neurek.Entities
         public List<CandidateSkill> Skills { get; set; }
         public List<CandidateEducation> Educations { get; set; }
         public List<CandidateExperience> Experiences { get; set; }
+        public List<CandidateLanguages> Languages { get; set; }
         public List<PortfolioFile> CandidateFiles { get; set; }
         public List<CandidatePreference> Preferences { get; set; }
         public Company Company { get; set; }

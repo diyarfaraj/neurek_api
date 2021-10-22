@@ -28,6 +28,10 @@ namespace neurek.Helpers
             CreateMap<AppUser, RecruterDto>();
             CreateMap<CompanyBenefit, CompanyBenefitDto>();
             CreateMap<Skills, SkillsDto>();
+            CreateMap<Language, LanguageDto>();
+            CreateMap<CandidateLanguages, CandidateLanguagesDto>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Language.Name))
+                .ForMember(dest => dest.LanguageIcon, opt => opt.MapFrom(src => src.Language.LanguageIcon)); ;
 
         }
     }

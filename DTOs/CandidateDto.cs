@@ -24,6 +24,7 @@ namespace neurek.DTOs
         public List<CandidateEducationDto> Educations { get; set; }
         public List<CandidateExperienceDto> Experiences { get; set; }
         public List<CandidatePreferenceDto> Preferences { get; set; }
+        public List<CandidateLanguagesDto> Languages { get; set; }
         public List<PortfolioFileDto> CandidateFiles { get; set; }
         public List<PhotoDto> Photos { get; set; }
     }
