@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace neurek.Entities
+namespace neurek.DTOs
 {
-    public class CandidateExperience
+    public class ExperienceDto
     {
         public int Id { get; set; }
         public string JobTtitle { get; set; }
@@ -13,9 +13,5 @@ namespace neurek.Entities
         public string JobDescription { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
-
-        public bool CurrentJob { get; set; }
-        public AppUser AppUser { get; set; }
-        public int AppUserId { get; set; }
     }
 }

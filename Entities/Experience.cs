@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace neurek.Entities
 {
-    public class CandidateExperience
+    public class Experience
     {
         public int Id { get; set; }
         public string JobTtitle { get; set; }
@@ -14,8 +14,5 @@ namespace neurek.Entities
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
 
-        public bool CurrentJob { get; set; }
-        public AppUser AppUser { get; set; }
-        public int AppUserId { get; set; }
     }
 }
