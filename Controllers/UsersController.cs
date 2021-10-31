@@ -9,6 +9,7 @@ using neurek.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace neurek.Controllers
@@ -43,6 +44,18 @@ namespace neurek.Controllers
         {
             return await _userRepository.GetRecruterAsync(email);
 
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateCandidate(CandidateUpdateDto candidateUpdateDto)
+        {
+            var email = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var candidate = await _userRepository.GetUserByEmailAsync(email);
+
+            _mapper.Map(candidateUpdateDto, candidate);
+            _userRepository.Update(candidate);
+            if (await _userRepository.SaveAllAsync()) return NoContent();
+            return BadRequest("failed to update user");
         }
     }
 }

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using neurek.Data;
 
 namespace neurek.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211026184627_AddDatetoEducation")]
+    partial class AddDatetoEducation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,12 +79,6 @@ namespace neurek.Data.Migrations
                     b.Property<int>("AppUserId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("City")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("EducationDescription")
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("EducationEndDate")
                         .HasColumnType("TEXT");
 
@@ -93,9 +89,6 @@ namespace neurek.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("MajoredIn")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SchoolName")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -126,7 +119,7 @@ namespace neurek.Data.Migrations
                     b.Property<string>("JobDescription")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("JobTitle")
+                    b.Property<string>("JobTtitle")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ToDate")

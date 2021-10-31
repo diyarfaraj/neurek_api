@@ -32,7 +32,8 @@ namespace neurek.Helpers
             CreateMap<Language, LanguageDto>();
             CreateMap<CandidateLanguages, CandidateLanguagesDto>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Language.Name))
-                .ForMember(dest => dest.LanguageIcon, opt => opt.MapFrom(src => src.Language.LanguageIcon)); ;
+                .ForMember(dest => dest.LanguageIcon, opt => opt.MapFrom(src => src.Language.LanguageIcon));
+            CreateMap<CandidateUpdateDto,AppUser>();
 
         }
     }

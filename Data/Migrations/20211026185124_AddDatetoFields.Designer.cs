@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using neurek.Data;
 
 namespace neurek.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211026185124_AddDatetoFields")]
+    partial class AddDatetoFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,7 +128,7 @@ namespace neurek.Data.Migrations
                     b.Property<string>("JobDescription")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("JobTitle")
+                    b.Property<string>("JobTtitle")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ToDate")
