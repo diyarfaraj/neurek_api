@@ -51,7 +51,10 @@ namespace neurek.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(x => x.Email == loginDto.Email.ToLower());
+            var user = await _context.Users
+                .Include(p => p.Photos)
+                .SingleOrDefaultAsync(x => x.Email == loginDto.Email.ToLower());
+                
             if(user == null)
             {
                 return Unauthorized("Invalid email");
@@ -70,8 +73,9 @@ namespace neurek.Controllers
             return new UserDto
             {
                 Email = user.Email,
-                Token = _tokenSevice.CreateToken(user)
-            }; ;
+                Token = _tokenSevice.CreateToken(user),
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url  
+            };
             
         }
 
