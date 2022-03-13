@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using neurek.Data;
 using neurek.DTOs;
@@ -18,11 +19,13 @@ namespace neurek.Controllers
     {
         private readonly DataContext _context;
         private readonly ITokenService _tokenSevice;
+        private readonly IMapper _mapper;
 
-        public AccountController(DataContext context, ITokenService tokenSevice)
+        public AccountController(DataContext context, ITokenService tokenSevice, IMapper mapper)
         {
             _context = context;
             _tokenSevice = tokenSevice;
+           _mapper = mapper;
         }
 
         [HttpPost("register")]
@@ -32,13 +35,14 @@ namespace neurek.Controllers
             {
                 return BadRequest("Email already in use");
             }
+
+            var user = _mapper.Map<AppUser>(registerDto);
             using var hmac = new HMACSHA512();
-            var user = new AppUser
-            {
-                Email = registerDto.Email.ToLower(),
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSalt = hmac.Key
-            };
+
+            user.Email = registerDto.Email.ToLower();
+            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+            user.PasswordSalt = hmac.Key;
+            
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return new UserDto
