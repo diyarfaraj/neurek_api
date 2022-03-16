@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using neurek.DTOs;
 using neurek.Entities;
+using neurek.Helpers;
 using neurek.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -51,15 +52,17 @@ namespace neurek.Data
             _context.Entry(user).State = EntityState.Modified;
         }
 
-        public async Task<IEnumerable<CandidateDto>> GetCandidatesAsync()
+        public async Task<PagedList<CandidateDto>> GetCandidatesAsync(UserParams userParams)
         {
-            var candidates = await _context.Users
+            var candidates = _context.Users
                 .Include(x => x.Skills)
                 .Include(x => x.Educations)
                 .Include(x => x.Experiences)
                 .Include(x => x.Preferences)
-                .ProjectTo<CandidateDto>(_mapper.ConfigurationProvider).ToListAsync();
-            return candidates;
+                .ProjectTo<CandidateDto>(_mapper.ConfigurationProvider)
+                .AsNoTracking();
+
+            return await PagedList<CandidateDto>.CreateAsync(candidates, userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<CandidateDto> GetCandidateAsync(string email)

@@ -7,6 +7,7 @@ using neurek.Data;
 using neurek.DTOs;
 using neurek.Entities;
 using neurek.Extensions;
+using neurek.Helpers;
 using neurek.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -32,9 +33,10 @@ namespace neurek.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CandidateDto>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<CandidateDto>>> GetUsers([FromQuery]UserParams userParams)
         {
-            var users = await _userRepository.GetCandidatesAsync();
+            var users = await _userRepository.GetCandidatesAsync(userParams);
+            Response.AddPaginationHeader(users.CurentPage, users.PageSize, users.TotalCount, users.TotalPages);
             return Ok(users);
         }
         [HttpGet("{email}", Name ="GetUser")]

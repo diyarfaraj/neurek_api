@@ -1,5 +1,6 @@
 ﻿using neurek.DTOs;
 using neurek.Entities;
+using neurek.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace neurek.Interfaces
         Task<IEnumerable<AppUser>> GetUsersAsync();
         Task<AppUser> GetUserByIdAsync(int id);
         Task<AppUser> GetUserByEmailAsync(string email);
-        Task<IEnumerable<CandidateDto>> GetCandidatesAsync();
+        Task<PagedList<CandidateDto>> GetCandidatesAsync( UserParams userParams);
         Task<CandidateDto> GetCandidateAsync(string email);
         Task<RecruterDto> GetRecruterAsync(string email);
     }
