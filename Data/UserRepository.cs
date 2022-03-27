@@ -54,15 +54,20 @@ namespace neurek.Data
 
         public async Task<PagedList<CandidateDto>> GetCandidatesAsync(UserParams userParams)
         {
-            var candidates = _context.Users
-                .Include(x => x.Skills)
+            var candidates = _context.Users.AsQueryable();
+
+
+            candidates = candidates.Where(c => c.Email != userParams.CurrentUsername);
+
+            return await PagedList<CandidateDto>.CreateAsync(
+                candidates.Include(x => x.Skills)
                 .Include(x => x.Educations)
                 .Include(x => x.Experiences)
                 .Include(x => x.Preferences)
                 .ProjectTo<CandidateDto>(_mapper.ConfigurationProvider)
-                .AsNoTracking();
-
-            return await PagedList<CandidateDto>.CreateAsync(candidates, userParams.PageNumber, userParams.PageSize);
+                .AsNoTracking(), 
+                userParams.PageNumber, 
+                userParams.PageSize);
         }
 
         public async Task<CandidateDto> GetCandidateAsync(string email)

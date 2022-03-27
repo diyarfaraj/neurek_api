@@ -35,6 +35,9 @@ namespace neurek.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CandidateDto>>> GetUsers([FromQuery]UserParams userParams)
         {
+            var user = await _userRepository.GetUserByEmailAsync(User.GetUserEmail());
+            userParams.CurrentUsername = user.Email;
+            
             var users = await _userRepository.GetCandidatesAsync(userParams);
             Response.AddPaginationHeader(users.CurentPage, users.PageSize, users.TotalCount, users.TotalPages);
             return Ok(users);
