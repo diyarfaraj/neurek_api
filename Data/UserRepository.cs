@@ -84,11 +84,11 @@ namespace neurek.Data
 
         public async Task<RecruterDto> GetRecruterAsync(string email)
         {
-            var user = await _context.Users
+            var recruter = await _context.Users
                 .Where(x => x.Company.Id > 0 && x.Email == email)
                 .ProjectTo<RecruterDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
-            return user;
+            return recruter;
         }
     }
 }
