@@ -13,6 +13,8 @@ namespace neurek.Entities
         public int YearFoundedIn { get; set; }
         public List<Photo> Photos { get; set; }
         public List<CompanyBenefit> Benefits { get; set; }
+        public List<JobAd> JobAds { get; set; }
+
 
 
     }

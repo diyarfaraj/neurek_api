@@ -41,7 +41,6 @@ C:\Users\User\source\repos\neurek\obj\Debug\net5.0\neurek.AssemblyInfo.cs
 C:\Users\User\source\repos\neurek\obj\Debug\net5.0\neurek.csproj.CoreCompileInputs.cache
 C:\Users\User\source\repos\neurek\obj\Debug\net5.0\neurek.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\User\source\repos\neurek\obj\Debug\net5.0\staticwebassets\neurek.StaticWebAssets.Manifest.cache
-C:\Users\User\source\repos\neurek\obj\Debug\net5.0\staticwebassets\neurek.StaticWebAssets.xml
 C:\Users\User\source\repos\neurek\obj\Debug\net5.0\scopedcss\bundle\neurek.styles.css
 C:\Users\User\source\repos\neurek\obj\Debug\net5.0\neurek.RazorTargetAssemblyInfo.cache
 C:\Users\User\source\repos\neurek\obj\Debug\net5.0\neurek.csproj.CopyComplete
@@ -49,7 +48,6 @@ C:\Users\User\source\repos\neurek\obj\Debug\net5.0\neurek.dll
 C:\Users\User\source\repos\neurek\obj\Debug\net5.0\ref\neurek.dll
 C:\Users\User\source\repos\neurek\obj\Debug\net5.0\neurek.pdb
 C:\Users\User\source\repos\neurek\obj\Debug\net5.0\neurek.genruntimeconfig.cache
-C:\Users\User\source\repos\neurek\obj\Debug\net5.0\neurek.csprojAssemblyReference.cache
 C:\Users\User\source\repos\neurek\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
 C:\Users\User\source\repos\neurek\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
 C:\Users\User\source\repos\neurek\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
@@ -62,3 +60,4 @@ C:\Users\User\source\repos\neurek\bin\Debug\net5.0\AutoMapper.Extensions.Microso
 C:\Users\User\source\repos\neurek\bin\Debug\net5.0\CloudinaryDotNet.dll
 C:\Users\User\source\repos\neurek\bin\Debug\net5.0\Microsoft.Extensions.WebEncoders.dll
 C:\Users\User\source\repos\neurek\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\User\source\repos\neurek\obj\Debug\net5.0\neurek.csproj.AssemblyReference.cache

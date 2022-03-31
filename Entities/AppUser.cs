@@ -20,15 +20,17 @@ namespace neurek.Entities
         public DateTime Created { get; set; } = DateTime.UtcNow;
         public DateTime LastActive { get; set; } = DateTime.UtcNow;
         public bool Deleted { get; set; }
+        public Company Company { get; set; }
+        public List<Photo> Photos { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
         public List<CandidateSkill> Skills { get; set; }
         public List<CandidateEducation> Educations { get; set; }
         public List<CandidateExperience> Experiences { get; set; }
         public List<CandidateLanguages> Languages { get; set; }
         public List<PortfolioFile> CandidateFiles { get; set; }
         public List<CandidatePreference> Preferences { get; set; }
-        public Company Company { get; set; }
-        public List<Photo> Photos { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
+        public ICollection<UserLike> LikedJobAds { get; set; }
+
     }
 }
