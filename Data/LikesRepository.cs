@@ -22,7 +22,7 @@ namespace neurek.Data
             return await _context.Likes.Where(j => j.JobAdId == jobAdId).ToListAsync();
         }
 
-        public async Task<UserLike> GetUserLike(int userId, int jobId)
+        public async Task<UserLike> GetUserLikes(int userId, int jobId)
         {
             return await _context.Likes.FindAsync(userId, jobId);
         }
@@ -33,5 +33,6 @@ namespace neurek.Data
                 .Include(x => x.LikedJobAds)
                 .FirstOrDefaultAsync(x => x.Id == userId); 
         }
+
     }
 }
