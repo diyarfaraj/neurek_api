@@ -15,6 +15,7 @@ namespace neurek.Data
 
         public DbSet<AppUser> Users{ get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<JobAd> JobAds { get; set; }
 
         public DbSet<UserLike> Likes { get; set; }
 

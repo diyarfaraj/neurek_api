@@ -19,8 +19,7 @@ namespace neurek.Data
 
         public UserRepository(DataContext context, IMapper mapper)
         {
-            _context = context;
-            _mapper = mapper;
+            
         }
 
         public async Task<AppUser> GetUserByIdAsync(int id)

@@ -14,11 +14,13 @@ namespace neurek.Controllers
     {
         private readonly IUserRepository _userRepository;
         private readonly ILikesRepository _likesRepository;
+        private readonly IJobAdRepository _jobAdRepository;
 
-        public LikesController(IUserRepository userRepository, ILikesRepository likesRepository)
+        public LikesController(IUserRepository userRepository, ILikesRepository likesRepository, IJobAdRepository jobAdRepository)
         {
             _userRepository = userRepository;
             _likesRepository = likesRepository;
+            _jobAdRepository = jobAdRepository;
         }
 
         [HttpPost("{jobAdId}")]
@@ -26,7 +28,14 @@ namespace neurek.Controllers
         {
             //create IJobAd repo
             var userId = User.GetUserId();
-            var likedJobAd = _likesRepository.get
+            var likedJobAd =  await _jobAdRepository.GetSingleJobAdAsync(jobAdId);
+
+            if (userId == null) return NotFound();
+
+            var alreadyLiked = await _likesRepository.GetJobAdWithLikes(jobAdId); //see if user has liked this add before, if true return bad req, change the methid to take in userId also
+            //
+
+
         }
     }
 }

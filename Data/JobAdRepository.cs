@@ -1,4 +1,6 @@
-﻿using neurek.Entities;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using neurek.Entities;
 using neurek.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,19 +11,32 @@ namespace neurek.Data
 {
     public class JobAdRepository : IJobAdRepository
     {
-        public Task<IEnumerable<JobAd>> GetJobAdsAsync()
+        private readonly DataContext _context;
+
+        public JobAdRepository(DataContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<bool> SaveAllAsync()
+        public async Task<IEnumerable<JobAd>> GetJobAdsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.JobAds.ToListAsync();
+
+        }
+
+        public async Task<JobAd> GetSingleJobAdAsync(int jobAdId)
+        {
+            return await _context.JobAds.FindAsync(jobAdId);
+        }
+
+        public async Task<bool> SaveAllAsync()
+        {
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public void Update(JobAd jobAd)
         {
-            throw new NotImplementedException();
+            _context.Entry(jobAd).State = EntityState.Modified;
         }
     }
 }

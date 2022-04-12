@@ -11,5 +11,6 @@ namespace neurek.Interfaces
         void Update(JobAd jobAd);
         Task<bool> SaveAllAsync();
         Task<IEnumerable<JobAd>> GetJobAdsAsync();
+        Task<JobAd> GetSingleJobAdAsync(int jobAdId);
     }
 }
